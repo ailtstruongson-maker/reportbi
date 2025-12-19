@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng Điều Khiển Hiện Đại</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+      
+      @media print {
+        body {
+          background-color: white !important;
+        }
+        header, nav, .no-print, #root > div > div > header, .theme-toggle-button {
+          display: none !important;
+        }
+        main {
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+        .printable-area {
+          box-shadow: none !important;
+          border: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          border-radius: 0 !important;
+        }
+        .dark .printable-area {
+            background-color: white !important;
+            color: black !important;
+        }
+        .dark .printable-area * {
+            color: black !important;
+            border-color: #ccc !important;
+        }
+        @page {
+          size: A4;
+          margin: 20mm;
+        }
+      }
+
+      /* Custom styles for compact image export */
+      .export-mode table {
+        font-size: 12px;
+        width: auto !important; /* Allow table to expand based on content */
+        min-width: auto !important;
+        table-layout: auto !important; /* Let content determine column width */
+      }
+      .export-mode th, .export-mode td {
+        padding: 5px 8px;
+        white-space: nowrap; /* Prevent text wrapping */
+        word-wrap: normal;
+      }
+      .export-mode .data-bar-container,
+      .export-mode .avatar-container,
+      .export-mode .performance-indicator,
+      .export-mode .no-print {
+        display: none;
+      }
+      .export-mode .employee-name-button {
+        /* Reset button styles for export */
+        font-weight: inherit;
+        color: inherit;
+        text-decoration: none;
+        pointer-events: none;
+      }
+      .export-mode .value-cell > div:first-child {
+        margin-bottom: 0; /* Remove margin when data bar is hidden */
+      }
+      
+      /* Compact table style for exporting */
+      .compact-export-table th, .compact-export-table td {
+          padding: 6px 8px !important;
+          font-size: 11px !important;
+          white-space: normal !important;
+          word-break: break-word !important;
+          vertical-align: middle;
+      }
+      .compact-export-table .sticky {
+          position: static !important; /* Disable sticky for capture */
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                DEFAULT: '#0ea5e9', // sky-500
+                '50': '#f0f9ff',
+                '100': '#e0f2fe',
+                '200': '#bae6fd',
+                '300': '#7dd3fc',
+                '400': '#38bdf8',
+                '500': '#0ea5e9',
+                '600': '#0284c7',
+                '700': '#0369a1',
+                '800': '#075985',
+                '900': '#0c4a6e',
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibVgm+TQFskWCL9zoqaGgzMDEAl9+HNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Babel Standalone for in-browser JSX/TS transpilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.23.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 dark:bg-slate-900 font-sans">
+    <div id="root">
+      <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:Inter,sans-serif;" class="bg-slate-50 dark:bg-slate-900">
+        <div style="text-align:center;">
+          <svg style="margin:auto;animation:spin 1s linear infinite;width:3rem;height:3rem;color:#0ea5e9;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle style="opacity:0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path style="opacity:0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p style="margin-top:1rem;font-size:1rem;font-weight:600;" class="text-slate-600 dark:text-slate-300">Đang tải ứng dụng...</p>
+        </div>
+        <style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>
+      </div>
+    </div>
+    
+    <!--
+      The main application script will be placed here.
+      'text/babel' tells the browser this needs transpilation.
+      'data-presets' configures Babel to handle modern JS, React (JSX), and TypeScript.
+    -->
+    <script type="text/babel" data-presets="env,react,typescript" src="index.tsx"></script>
+  </body>
+</html>
